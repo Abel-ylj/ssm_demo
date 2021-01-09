@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+                          http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd
+                          http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 配置组件扫描 -->
+    <context:component-scan base-package="cn.ylj"></context:component-scan>
+
+    <!-- Aop自动代理 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+
+<!--    <bean id="myAspect" class="cn.ylj.aspect.MyAspect"></bean>-->
+<!--    <bean id="userDao" class="cn.ylj.dao.impl.UserDaoImpl"></bean>-->
+
+<!--    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource" factory-bean=""></bean>-->
+
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <property name="dataSource" ref="ds"></property>-->
+<!--    </bean>-->
+
+    <aop:config>
+        <aop:aspect ref="myAspect">
+            <!--切点表达式抽取-->
+            <aop:pointcut id="mypointcut" expression="execution(* cn.ylj.dao.impl.UserDaoImpl.*(..))"/>
+
+            <aop:before method="before" pointcut-ref="mypointcut"></aop:before>
+            <aop:after-returning method="after" pointcut-ref="mypointcut"></aop:after-returning>
+            <aop:after method="after" pointcut-ref="mypointcut"></aop:after>
+            <aop:around method="around" pointcut-ref="mypointcut"></aop:around>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="mypointcut"></aop:after-throwing>
+        </aop:aspect>
+    </aop:config>
+
+<!--    &lt;!&ndash; 平台事务管理器(指定Dao层用jdbc技术) &ndash;&gt;-->
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="ds"></property>-->
+<!--    </bean>-->
+
+    <!-- 事务的注解驱动 -->
+<!--    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
+
+<!--    &lt;!&ndash; 通知(开启事务，提交事务，回滚事务，涉及到具体的数据库api，所以要持有平台事务管理器实例)   &ndash;&gt;-->
+<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            &lt;!&ndash;  切点方法的事务参数列表(列表中的方法若未被切点表达式匹配，则是冗余项)  &ndash;&gt;-->
+<!--            <tx:method name="transfer" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="false"/>-->
+<!--            <tx:method name="selectAll" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="true"/>-->
+<!--            <tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="false"/>-->
+<!--            <tx:method name="*"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+
+<!--    &lt;!&ndash; 织入关系   &ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pt" expression="execution(* cn.ylj.service.impl.AccountServiceImpl.*(..))"/>-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>-->
+<!--    </aop:config>-->
+</beans>
