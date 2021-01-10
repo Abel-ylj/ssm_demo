@@ -19,6 +19,26 @@ import java.io.*;
 @ResponseBody
 public class FileController {
 
+    @RequestMapping("/fileUpload2")
+    public void fileUpload2(HttpServletRequest req, HttpServletResponse resp,@RequestParam("file") MultipartFile file){
+        String filename = file.getOriginalFilename();
+        //获取项目地址
+        String contextPath = req.getContextPath();
+        contextPath = req.getServletContext().getRealPath(contextPath);
+        File dir = new File(contextPath, "up_data");
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
+        //写文件
+        if (file != null){
+            try {
+                file.transferTo(new File(dir,  filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @RequestMapping("/fileUpload")
     public void fileUpload(HttpServletRequest req, HttpServletResponse resp,@RequestParam("file") MultipartFile file){
         String name = file.getOriginalFilename();
