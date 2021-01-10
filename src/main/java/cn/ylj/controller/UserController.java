@@ -5,11 +5,11 @@ import cn.ylj.model.UserVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +19,26 @@ import java.util.List;
  */
 @Controller
 public class UserController {
+
+    @RequestMapping("/quick10")
+    @ResponseBody
+    public void userSave10(@CookieValue(value = "JSESSION") String sessionId)  {
+        System.out.println(sessionId);
+    }
+
+    @RequestMapping("/quick9")
+    @ResponseBody
+    public void userSave9(@RequestHeader(value = "user-agent") String headerStr)  {
+        System.out.println(headerStr);
+    }
+
+    @RequestMapping("/quick8")
+    @ResponseBody
+    public void userSave8(HttpServletRequest req, HttpServletResponse resp, HttpSession session)  {
+        System.out.println(req);
+        System.out.println(resp);
+        System.out.println(session);
+    }
 
     @RequestMapping("/quick7")
     @ResponseBody
