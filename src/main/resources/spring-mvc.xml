@@ -21,7 +21,18 @@
 <!--        </property>-->
 <!--    </bean>-->
 
-    <mvc:annotation-driven></mvc:annotation-driven>
+<!--    声明转换器-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="cn.ylj.converter.DateConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+<!--    自动注入SpringMVC三大组件1.处理器映射器 2.处理器适配器(jacksonConverter) 3.资源解析器-->
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+<!--    <mvc:annotation-driven></mvc:annotation-driven>-->
 
 <!--  放开静态资源  -->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>

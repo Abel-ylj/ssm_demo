@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +19,12 @@ import java.util.List;
  */
 @Controller
 public class UserController {
+
+    @RequestMapping("/quick7")
+    @ResponseBody
+    public void userSave7(@RequestParam(value = "createAt", required = false) Date createAt)  {
+        System.out.println(createAt);
+    }
 
     @RequestMapping("/quick6")
     @ResponseBody
