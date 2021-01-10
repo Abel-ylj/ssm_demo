@@ -95,6 +95,6 @@ public class UserController {
     @RequestMapping("/quick")
     @ResponseBody
     public String userSave(){
-        return "success.jsp";
+        return "success";
     }
 }

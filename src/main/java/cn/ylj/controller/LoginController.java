@@ -13,7 +13,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public ModelAndView loginShow(ModelAndView mv){
-        mv.setViewName("index.jsp");
+        mv.setViewName("index");
         mv.addObject("username","ylj");
         return mv;
     }

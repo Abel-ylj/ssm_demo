@@ -20,7 +20,7 @@ public class MyInterceptor implements HandlerInterceptor {
         //用户校验，若未登陆则返回用户页面
         String sessionId = request.getParameter("sessionId");
         if (sessionId == null){
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            request.getRequestDispatcher("error").forward(request, response);
         } else {
             //继续走后续的拦截器链
             return true;

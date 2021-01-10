@@ -30,6 +30,12 @@
         </property>
     </bean>
 
+<!--    配置内部视图解析器，注入我的参数，不用spring自己默认参数，可以省略前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
 <!--    自动注入SpringMVC三大组件1.处理器映射器 2.处理器适配器(jacksonConverter) 3.资源解析器-->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 <!--    <mvc:annotation-driven></mvc:annotation-driven>-->
@@ -48,10 +54,23 @@
     </bean>
 
     <!--  拦截器注册  -->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="cn.ylj.interceptor.MyInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="cn.ylj.interceptor.MyInterceptor"></bean>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+
+    <!-- 简单异常处理器注册 -->
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+<!--        <property name="defaultErrorView" value="error"></property>-->
+<!--        <property name="exceptionMappings">-->
+<!--            <map>-->
+<!--                <entry key="cn.ylj.exception.MyException" value="MyExceptionResp"></entry>-->
+<!--                <entry key="java.lang.ClassCastException" value="classCast"></entry>-->
+<!--            </map>-->
+<!--        </property>-->
+<!--    </bean>-->
+    <!--  自定义异常处理器  -->
+    <bean class="cn.ylj.exresolver.MyExcepResolver"></bean>
 </beans>
