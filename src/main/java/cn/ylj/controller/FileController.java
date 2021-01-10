@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.List;
 
 /**
  * @author : yanglujian
@@ -18,6 +19,14 @@ import java.io.*;
 @Controller
 @ResponseBody
 public class FileController {
+
+    @RequestMapping("/fileUpload3")
+    public void fileUpload3(HttpServletRequest req, HttpServletResponse resp,@RequestParam("files") List<MultipartFile> files){
+        for (MultipartFile file : files) {
+            this.fileUpload2(req, resp, file);
+        }
+    }
+
 
     @RequestMapping("/fileUpload2")
     public void fileUpload2(HttpServletRequest req, HttpServletResponse resp,@RequestParam("file") MultipartFile file){
