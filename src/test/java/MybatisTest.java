@@ -27,9 +27,11 @@ public class MybatisTest {
         //获取session
         SqlSession sqlSession = sqlSessionFactory.openSession();
         //执行操作
-        sqlSession.delete("userMapper.delete",4);
+        sqlSession.delete("userMapper.delete",1);
         //mybatis默认不自动提交事务
         sqlSession.commit();
+        //回滚
+        //sqlSession.rollback();
         //关闭
         sqlSession.close();
     }

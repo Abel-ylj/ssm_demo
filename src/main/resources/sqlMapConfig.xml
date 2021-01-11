@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!-- 加载属性文件   -->
+    <properties resource="jdbc.properties"/>
 
+    <!-- 类型别名 int double等Mybatis都已经内置了 -->
+    <typeAliases>
+        <typeAlias type="cn.ylj.entity.UserEntity" alias="user"></typeAlias>
+    </typeAliases>
     <!--  数据源环境  -->
     <environments default="developement">
         <environment id="developement">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://101.37.88.211:3306/test1"/>
-                <property name="username" value="root"/>
-                <property name="password" value="Yang265910."/>
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
