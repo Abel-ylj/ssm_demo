@@ -1,6 +1,5 @@
 package cn.ylj.controller;
 
-import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
