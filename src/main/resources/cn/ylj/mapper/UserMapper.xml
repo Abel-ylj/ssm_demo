@@ -4,4 +4,16 @@
     <select id="selectAll" resultType="cn.ylj.entity.UserEntity">
         select * from user
     </select>
+
+    <select id="insert" parameterType="cn.ylj.entity.UserEntity">
+        insert into user values (#{id},#{username},#{password},#{gender},#{age},#{address},#{qq},#{email})
+    </select>
+
+    <update id="update" parameterType="cn.ylj.entity.UserEntity">
+        update user set username = #{username}, address=#{address} where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from user where id = #{id}
+    </delete>
 </mapper>
