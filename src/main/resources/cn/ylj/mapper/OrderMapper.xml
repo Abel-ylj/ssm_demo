@@ -3,15 +3,29 @@
 <mapper namespace="cn.ylj.mapper.OrderMapper">
 
     <resultMap id="orderMap" type="cn.ylj.entity.OrderEntity">
-        <result column="uid" property="user.id"></result>
-        <result column="username" property="user.username"></result>
-        <result column="password" property="user.password"></result>
-        <result column="gender" property="user.gender"></result>
-        <result column="age" property="user.age"></result>
-        <result column="address" property="user.address"></result>
-        <result column="qq" property="user.qq"></result>
-        <result column="email" property="user.email"></result>
-        <result column="createAt" property="user.createAt"></result>
+        <id column="id" property="id"></id>
+        <result column="total" property="total"></result>
+        <result column="ordertime" property="ordertime"></result>
+<!--        <result column="uid" property="user.id"></result>-->
+<!--        <result column="username" property="user.username"></result>-->
+<!--        <result column="password" property="user.password"></result>-->
+<!--        <result column="gender" property="user.gender"></result>-->
+<!--        <result column="age" property="user.age"></result>-->
+<!--        <result column="address" property="user.address"></result>-->
+<!--        <result column="qq" property="user.qq"></result>-->
+<!--        <result column="email" property="user.email"></result>-->
+<!--        <result column="createAt" property="user.createAt"></result>-->
+        <association property="user" javaType="cn.ylj.entity.UserEntity">
+                    <result column="uid" property="id"></result>
+                    <result column="username" property="username"></result>
+                    <result column="password" property="password"></result>
+                    <result column="gender" property="gender"></result>
+                    <result column="age" property="age"></result>
+                    <result column="address" property="address"></result>
+                    <result column="qq" property="qq"></result>
+                    <result column="email" property="email"></result>
+                    <result column="createAt" property="createAt"></result>
+        </association>
     </resultMap>
 
     <select id="selectOneByOid" resultMap="orderMap">
