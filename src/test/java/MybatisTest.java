@@ -1,6 +1,8 @@
 import cn.ylj.dao.UserMapper;
 import cn.ylj.dao.impl.UserMapperImpl;
 import cn.ylj.entity.UserEntity;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -19,6 +21,27 @@ import java.util.List;
 public class MybatisTest {
 
     @Test
+    public void pageHelperTest(){
+        //获取核心配置文件
+        InputStream resourceAsStream = null;
+        try {
+            resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //获取session工厂对象
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        //获取sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        PageHelper.startPage(2, 5);
+        List<UserEntity> users = userMapper.selectAll();
+        for (UserEntity user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
     public void TypeHandlerInsertTest(){
         //获取核心配置文件
         InputStream resourceAsStream = null;
@@ -34,11 +57,18 @@ public class MybatisTest {
         //获取代理对象(产生sqlSession的代理对象，用来代理UserMapper接口中的所有方法)
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         UserEntity user = new UserEntity();
-        user.setUsername("ceshi999");
-        user.setAddress("ceshi999");
-        user.setCreateAt(new Date());
-        userMapper.insert(user);
+//        user.setUsername("ceshi100");
+//        user.setAddress("ceshi100");
+//        user.setCreateAt(new Date());
+        Date now = new Date();
+        for (int i = 0; i < 100; i++) {
+            user.setUsername("ceshi100" + i);
+            user.setAddress("ceshi100" + i);
+            user.setCreateAt(now);
+            userMapper.insert(user);
+        }
         //关闭
+        sqlSession.commit();
         sqlSession.close();
     }
 
