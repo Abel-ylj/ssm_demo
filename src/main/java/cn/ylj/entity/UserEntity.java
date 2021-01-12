@@ -1,5 +1,6 @@
 package cn.ylj.entity;
 
+import javax.management.relation.Role;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,16 @@ public class UserEntity {
     public String email;
 
     public Date createAt;
+
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public List<OrderEntity> orders;
 

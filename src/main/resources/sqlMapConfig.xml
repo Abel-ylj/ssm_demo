@@ -38,5 +38,6 @@
     <mappers>
         <mapper resource="cn/ylj/mapper/UserMapper.xml"></mapper>
         <mapper resource="cn/ylj/mapper/OrderMapper.xml"></mapper>
+        <mapper resource="cn/ylj/mapper/RoleMapper.xml"></mapper>
     </mappers>
 </configuration>
