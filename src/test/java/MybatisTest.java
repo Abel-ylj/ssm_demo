@@ -1,3 +1,4 @@
+import cn.ylj.dao.UserMapper;
 import cn.ylj.entity.UserEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +15,29 @@ import java.util.List;
  * create at:  2021/1/11  4:24 下午
  */
 public class MybatisTest {
+
+    /**
+     * 查询（代理）
+     * @throws IOException
+     */
+    @Test
+    public void findAll() throws IOException {
+        //获取核心配置文件
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        //获取session工厂对象
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        //获取sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //获取代理对象(产生sqlSession的代理对象，用来代理UserMapper接口中的所有方法)
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<UserEntity> users = userMapper.selectAll();
+        for (UserEntity user : users) {
+            System.out.println(user);
+        }
+        //关闭
+        sqlSession.close();
+    }
+
 
     /**
      * 删除
