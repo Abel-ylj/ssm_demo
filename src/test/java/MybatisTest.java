@@ -1,4 +1,5 @@
 import cn.ylj.dao.UserMapper;
+import cn.ylj.dao.impl.UserMapperImpl;
 import cn.ylj.entity.UserEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +17,40 @@ import java.util.List;
  * create at:  2021/1/11  4:24 下午
  */
 public class MybatisTest {
+
+    @Test
+    public void TypeHandlerInsertTest(){
+        //获取核心配置文件
+        InputStream resourceAsStream = null;
+        try {
+            resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //获取session工厂对象
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        //获取sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //获取代理对象(产生sqlSession的代理对象，用来代理UserMapper接口中的所有方法)
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        UserEntity user = new UserEntity();
+        user.setUsername("ceshi999");
+        user.setAddress("ceshi999");
+        user.setCreateAt(new Date());
+        userMapper.insert(user);
+        //关闭
+        sqlSession.close();
+    }
+
+    @Test
+    public void typeHandlerInsertTest1(){
+        UserMapper userMapper = new UserMapperImpl();
+        UserEntity user = new UserEntity();
+        user.setUsername("ceshi999");
+        user.setAddress("ceshi999");
+        user.setCreateAt(new Date());
+        userMapper.insert(user);
+    }
 
     /**
      * 查询（代理）
@@ -104,7 +140,7 @@ public class MybatisTest {
         user.setAddress("测试地址");
         user.setQq("123456");
         user.setEmail("123456@qq.com");
-        sqlSession.insert("userMapper.insert",user);
+        sqlSession.insert("cn.ylj.dao.UserMapper.insert",user);
         //mybatis默认不自动提交事务
         sqlSession.commit();
         //关闭

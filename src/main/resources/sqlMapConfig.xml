@@ -8,6 +8,12 @@
     <typeAliases>
         <typeAlias type="cn.ylj.entity.UserEntity" alias="user"></typeAlias>
     </typeAliases>
+
+    <!--  注册类型处理器  -->
+    <typeHandlers>
+        <typeHandler handler="cn.ylj.handler.DateTypeHandler"></typeHandler>
+    </typeHandlers>
+
     <!--  数据源环境  -->
     <environments default="developement">
         <environment id="developement">

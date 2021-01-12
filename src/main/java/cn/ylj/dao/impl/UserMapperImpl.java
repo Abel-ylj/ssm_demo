@@ -36,4 +36,24 @@ public class UserMapperImpl implements UserMapper {
         return users;
     }
 
+    public void insert(UserEntity user) {
+        //获取核心配置文件
+        InputStream resourceAsStream = null;
+        try {
+            resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //获取session工厂对象
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        //获取session
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        //执行操作
+        sqlSession.insert("cn.ylj.dao.UserMapper.insert",user);
+        //mybatis默认不自动提交事务
+        sqlSession.commit();
+        //关闭
+        sqlSession.close();
+    }
+
 }

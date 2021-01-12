@@ -1,23 +1,12 @@
 package cn.ylj.entity;
 
+import java.util.Date;
+
 /**
  * @author : yanglujian
  * create at:  2021/1/8  12:52 下午
  */
 public class UserEntity {
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                ", qq='" + qq + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 
     public int id;
 
@@ -34,6 +23,16 @@ public class UserEntity {
     public String qq;
 
     public String email;
+
+    public Date createAt;
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
     public int getId() {
         return id;
@@ -99,4 +98,18 @@ public class UserEntity {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", qq='" + qq + '\'' +
+                ", email='" + email + '\'' +
+                ", createAt=" + createAt +
+                '}';
+    }
 }
