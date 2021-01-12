@@ -28,4 +28,30 @@
     <delete id="delete" parameterType="int">
         delete from user where id = #{id}
     </delete>
+
+    <resultMap id="userOrderMap" type="cn.ylj.entity.UserEntity">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="gender" property="gender"></result>
+        <result column="age" property="age"></result>
+        <result column="address" property="address"></result>
+        <result column="qq" property="qq"></result>
+        <result column="email" property="email"></result>
+        <result column="createAt" property="createAt"></result>
+        <collection property="orders" ofType="cn.ylj.entity.OrderEntity">
+            <id column="oid" property="id"></id>
+            <result column="total" property="total"></result>
+            <result column="ordertime" property="ordertime"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectOneWithOrderByUid" resultMap="userOrderMap">
+        select
+        *,
+        o.id as 'oid'
+        from `user` u, `order` o
+        where u.id = o.uid
+        and u.id = #{id}
+    </select>
 </mapper>

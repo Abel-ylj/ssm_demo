@@ -1,6 +1,7 @@
 package cn.ylj.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author : yanglujian
@@ -25,6 +26,16 @@ public class UserEntity {
     public String email;
 
     public Date createAt;
+
+    public List<OrderEntity> orders;
+
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
+    }
 
     public Date getCreateAt() {
         return createAt;

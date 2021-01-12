@@ -56,4 +56,8 @@ public class UserMapperImpl implements UserMapper {
         sqlSession.close();
     }
 
+    public UserEntity selectOneWithOrderByUid(Long id) {
+        return null;
+    }
+
 }
