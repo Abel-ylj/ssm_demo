@@ -1,4 +1,4 @@
-package cn.ylj.dao;
+package cn.ylj.mapper;
 
 import cn.ylj.entity.UserEntity;
 

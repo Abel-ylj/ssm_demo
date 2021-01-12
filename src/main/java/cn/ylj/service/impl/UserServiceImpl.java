@@ -1,11 +1,10 @@
 package cn.ylj.service.impl;
 
-import cn.ylj.dao.IUserDao;
+import cn.ylj.mapper.IUserDao;
 import cn.ylj.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

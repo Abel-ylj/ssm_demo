@@ -1,7 +1,7 @@
 package cn.ylj.proxy;
 
-import cn.ylj.dao.IUserDao;
-import cn.ylj.dao.impl.UserDaoImpl;
+import cn.ylj.mapper.IUserDao;
+import cn.ylj.mapper.impl.UserDaoImpl;
 
 /**
  * 静态代理

@@ -1,7 +1,6 @@
-import cn.ylj.dao.UserMapper;
-import cn.ylj.dao.impl.UserMapperImpl;
+import cn.ylj.mapper.UserMapper;
+import cn.ylj.mapper.impl.UserMapperImpl;
 import cn.ylj.entity.UserEntity;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

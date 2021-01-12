@@ -37,7 +37,7 @@ public class MyAspect {
     /**
      * 切点表达式抽取
      */
-    @Pointcut("execution(* cn.ylj.dao.impl.UserDaoImpl.*(..))")
+    @Pointcut("execution(* cn.ylj.mapper.impl.UserDaoImpl.*(..))")
     public void myPointCut(){
     }
 }

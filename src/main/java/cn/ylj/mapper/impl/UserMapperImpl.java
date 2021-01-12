@@ -1,6 +1,6 @@
-package cn.ylj.dao.impl;
+package cn.ylj.mapper.impl;
 
-import cn.ylj.dao.UserMapper;
+import cn.ylj.mapper.UserMapper;
 import cn.ylj.entity.UserEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

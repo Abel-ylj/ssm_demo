@@ -1,6 +1,6 @@
-package cn.ylj.dao.impl;
+package cn.ylj.mapper.impl;
 
-import cn.ylj.dao.IUserDao;
+import cn.ylj.mapper.IUserDao;
 import org.springframework.stereotype.Repository;
 
 /**

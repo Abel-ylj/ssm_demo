@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ylj.mapper.OrderMapper">
+
+    <resultMap id="orderMap" type="cn.ylj.entity.OrderEntity">
+        <result column="uid" property="user.id"></result>
+        <result column="username" property="user.username"></result>
+        <result column="password" property="user.password"></result>
+        <result column="gender" property="user.gender"></result>
+        <result column="age" property="user.age"></result>
+        <result column="address" property="user.address"></result>
+        <result column="qq" property="user.qq"></result>
+        <result column="email" property="user.email"></result>
+        <result column="createAt" property="user.createAt"></result>
+    </resultMap>
+
+    <select id="selectOneByOid" resultMap="orderMap">
+        select
+        o.id,
+        o.total,
+        o.ordertime,
+        u.username,
+        u.password,
+        u.gender,
+        u.age,
+        u.address,
+        u.qq,
+        u.email,
+        u.createAt
+        from `order` o
+        left join `user` u on o.uid = u.id
+        where o.id = #{id}
+    </select>
+</mapper>

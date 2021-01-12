@@ -37,5 +37,6 @@
     <!--  加载映射文件  -->
     <mappers>
         <mapper resource="cn/ylj/mapper/UserMapper.xml"></mapper>
+        <mapper resource="cn/ylj/mapper/OrderMapper.xml"></mapper>
     </mappers>
 </configuration>

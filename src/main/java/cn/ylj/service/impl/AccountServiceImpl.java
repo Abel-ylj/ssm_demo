@@ -1,6 +1,6 @@
 package cn.ylj.service.impl;
 
-import cn.ylj.dao.IAccountDao;
+import cn.ylj.mapper.IAccountDao;
 import cn.ylj.entity.AccountEntity;
 import cn.ylj.service.IAccountService;
 import org.springframework.stereotype.Service;

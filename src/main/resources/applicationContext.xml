@@ -17,7 +17,7 @@
 
 
 <!--    <bean id="myAspect" class="cn.ylj.aspect.MyAspect"></bean>-->
-<!--    <bean id="userDao" class="cn.ylj.dao.impl.UserDaoImpl"></bean>-->
+<!--    <bean id="userDao" class="cn.ylj.mapper.impl.UserDaoImpl"></bean>-->
 
 <!--    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource" factory-bean=""></bean>-->
 
@@ -28,7 +28,7 @@
     <aop:config>
         <aop:aspect ref="myAspect">
             <!--切点表达式抽取-->
-            <aop:pointcut id="mypointcut" expression="execution(* cn.ylj.dao.impl.UserDaoImpl.*(..))"/>
+            <aop:pointcut id="mypointcut" expression="execution(* cn.ylj.mapper.impl.UserDaoImpl.*(..))"/>
 
             <aop:before method="before" pointcut-ref="mypointcut"></aop:before>
             <aop:after-returning method="after" pointcut-ref="mypointcut"></aop:after-returning>

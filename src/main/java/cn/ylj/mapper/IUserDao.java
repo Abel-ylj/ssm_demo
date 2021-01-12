@@ -1,4 +1,4 @@
-package cn.ylj.dao;
+package cn.ylj.mapper;
 
 public interface IUserDao {
 
