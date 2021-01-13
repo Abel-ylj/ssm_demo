@@ -70,7 +70,12 @@ public class UserServiceImpl implements IUserService {
         return userEntities;
     }
 
-    public void save() {
-        dao.save();
+
+    //transaction示例,可以用注解，也可以使用配置xml
+//    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
+    public void save(UserEntity user) {
+        userMapper.insert(user);
+        int i = 1/0;
+        userMapper.insert(user);
     }
 }

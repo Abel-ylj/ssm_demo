@@ -8,5 +8,5 @@ public interface IUserService {
 
     List<UserEntity> list();
 
-    void save();
+    void save(UserEntity user);
 }

@@ -39,33 +39,35 @@
         </aop:aspect>
     </aop:config>
 
-<!--    &lt;!&ndash; 平台事务管理器(指定Dao层用jdbc技术) &ndash;&gt;-->
-<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="ds"></property>-->
-<!--    </bean>-->
+<!--  申明式事务  -->
+    <!-- 平台事务管理器(指定Dao层用jdbc技术) -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds"></property>
+    </bean>
 
-    <!-- 事务的注解驱动 -->
+    <!--  事务的注解驱动,可以扫描@Transaction -->
+<!--    <tx:annotation-driven></tx:annotation-driven>-->
 <!--    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
 
-<!--    &lt;!&ndash; 通知(开启事务，提交事务，回滚事务，涉及到具体的数据库api，所以要持有平台事务管理器实例)   &ndash;&gt;-->
-<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-<!--        <tx:attributes>-->
-<!--            &lt;!&ndash;  切点方法的事务参数列表(列表中的方法若未被切点表达式匹配，则是冗余项)  &ndash;&gt;-->
-<!--            <tx:method name="transfer" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="false"/>-->
-<!--            <tx:method name="selectAll" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="true"/>-->
-<!--            <tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="false"/>-->
-<!--            <tx:method name="*"/>-->
-<!--        </tx:attributes>-->
-<!--    </tx:advice>-->
+    <!-- 通知(开启事务，提交事务，回滚事务，涉及到具体的数据库api，所以要持有平台事务管理器实例)   -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--  切点方法的事务参数列表(下列表中的方法肯定要被切点表达式命中)  -->
+            <tx:method name="transfer" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="false"/>
+            <tx:method name="selectAll" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="true"/>
+            <tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" timeout="-1" read-only="false"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
 
-<!--    &lt;!&ndash; 织入关系   &ndash;&gt;-->
-<!--    <aop:config>-->
-<!--        <aop:pointcut id="pt" expression="execution(* cn.ylj.service.impl.AccountServiceImpl.*(..))"/>-->
-<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>-->
-<!--    </aop:config>-->
+    <!-- 织入关系   -->
+    <aop:config>
+        <aop:pointcut id="pt" expression="execution(* cn.ylj.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>
+    </aop:config>
 
 
-
+<!-- Mybatis -->
     <!--  加载外部properties属性文件  -->
     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
     <!--    注入SqlSessionFactory对象-->
