@@ -4,10 +4,9 @@ import cn.ylj.entity.UserEntity;
 import cn.ylj.mapper.IUserDao;
 import cn.ylj.mapper.UserMapper;
 import cn.ylj.service.IUserService;
-import cn.ylj.utils.MybatisSessionFactoryUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,8 +17,11 @@ import java.util.List;
 public class UserServiceImpl implements IUserService {
 
     //使用spring封装的jdbcTemplate访问数据库
-    @Autowired
+    @Resource(name = "IUserDao")
     private IUserDao dao;
+
+    @Resource
+    private UserMapper userMapper;
 
     public void setDao(IUserDao userDao){
         this.dao = userDao;
@@ -59,7 +61,11 @@ public class UserServiceImpl implements IUserService {
 
         //创建了单例的工具类，实际上这个过程可以自动化，
         //改进：启动时扫描mapper接口，自动创建mapper代理对象到IoC容器中，哪里需要注哪里
-        UserMapper userMapper = MybatisSessionFactoryUtils.getMapper(UserMapper.class);
+//        UserMapper userMapper = MybatisSessionFactoryUtils.getMapper(UserMapper.class);
+//        List<UserEntity> userEntities = userMapper.selectAll();
+
+
+        //Spring继承Mybatis后，在IoC容器初始化时，就按照配置完成了mapper代理对象(目标对象是sqlSession)的实例化，要用时注入就行
         List<UserEntity> userEntities = userMapper.selectAll();
         return userEntities;
     }

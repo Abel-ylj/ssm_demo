@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements IAccountService {
 
-    @Resource
+    @Resource(name = "IAccountDao")
     private IAccountDao accountDao;
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ, timeout = 100, rollbackFor = Exception.class)

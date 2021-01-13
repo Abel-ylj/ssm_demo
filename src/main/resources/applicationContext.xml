@@ -12,6 +12,7 @@
     <!-- 配置组件扫描:Spring层不扫描Spring层的注解：原因：各司其职 -->
     <context:component-scan base-package="cn.ylj">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 
     <!-- Aop自动代理 -->
@@ -19,8 +20,6 @@
 
 
 <!--    <bean id="myAspect" class="cn.ylj.aspect.MyAspect"></bean>-->
-<!--    <bean id="userDao" class="cn.ylj.mapper.impl.UserDaoImpl"></bean>-->
-
 <!--    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource" factory-bean=""></bean>-->
 
 <!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
@@ -64,4 +63,27 @@
 <!--        <aop:pointcut id="pt" expression="execution(* cn.ylj.service.impl.AccountServiceImpl.*(..))"/>-->
 <!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"></aop:advisor>-->
 <!--    </aop:config>-->
+
+
+
+    <!--  加载外部properties属性文件  -->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <!--    注入SqlSessionFactory对象-->
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds"></property>
+        <!--  加载核心配置文件  -->
+        <property name="configLocation" value="classpath:spring-sqlMapConfig.xml"></property>
+    </bean>
+
+    <!-- 扫描mapper接口，创建代理sqlSession的动态代理对象，在核心配置文件中也能配，但是Mybatis给出了兼容spring的配置类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--  扫描完这个包，IoC容器中就有代理类了 -->
+        <property name="basePackage" value="cn.ylj.mapper"></property>
+    </bean>
 </beans>
