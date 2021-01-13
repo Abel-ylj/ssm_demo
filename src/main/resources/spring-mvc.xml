@@ -10,7 +10,10 @@
 
 
 <!--  Controller组件扫描(mvc的jar包，只负责Controller)  -->
-<context:component-scan base-package="cn.ylj.controller"></context:component-scan>
+<context:component-scan base-package="cn.ylj.controller">
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+</context:component-scan>
 
 <!--    &lt;!&ndash; 配置json消息转换器： 在方法适配器中 &ndash;&gt;-->
 <!--    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
@@ -71,6 +74,6 @@
 <!--            </map>-->
 <!--        </property>-->
 <!--    </bean>-->
-    <!--  自定义异常处理器  -->
+    <!--  自定义全局异常处理器  -->
     <bean class="cn.ylj.exresolver.MyExcepResolver"></bean>
 </beans>
