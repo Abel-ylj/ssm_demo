@@ -4,15 +4,10 @@ import cn.ylj.entity.UserEntity;
 import cn.ylj.mapper.IUserDao;
 import cn.ylj.mapper.UserMapper;
 import cn.ylj.service.IUserService;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import cn.ylj.utils.MybatisSessionFactoryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -48,19 +43,21 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     public List<UserEntity> list() {
-        //获取核心配置文件
-        InputStream resourceAsStream = null;
-        try {
-            resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //获取session工厂对象
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
-        //获取sqlSession
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        //获取代理对象(产生sqlSession的代理对象，用来代理UserMapper接口中的所有方法)
-        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//        //获取核心配置文件
+//        InputStream resourceAsStream = null;
+//        try {
+//            resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        //获取session工厂对象
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+//        //获取sqlSession
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        //获取代理对象(产生sqlSession的代理对象，用来代理UserMapper接口中的所有方法)
+//        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        UserMapper userMapper = MybatisSessionFactoryUtils.getMapper(UserMapper.class);
         List<UserEntity> userEntities = userMapper.selectAll();
         return userEntities;
     }
