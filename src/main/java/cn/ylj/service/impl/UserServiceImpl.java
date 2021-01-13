@@ -57,6 +57,8 @@ public class UserServiceImpl implements IUserService {
 //        //获取代理对象(产生sqlSession的代理对象，用来代理UserMapper接口中的所有方法)
 //        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
+        //创建了单例的工具类，实际上这个过程可以自动化，
+        //改进：启动时扫描mapper接口，自动创建mapper代理对象到IoC容器中，哪里需要注哪里
         UserMapper userMapper = MybatisSessionFactoryUtils.getMapper(UserMapper.class);
         List<UserEntity> userEntities = userMapper.selectAll();
         return userEntities;
